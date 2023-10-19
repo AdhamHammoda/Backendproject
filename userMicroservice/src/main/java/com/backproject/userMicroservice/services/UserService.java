@@ -12,13 +12,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
     private final UserDAO userDAO;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
@@ -26,10 +26,15 @@ public class UserService {
 
     public List<User> getUsersData()
     {
-        return userDAO.findAll();
+        List<User> users= userDAO.findAll();
+        return users;
     }
     public AuthenticationResponse register(RegisterRequest request)
     {
+        if(userDAO.findByUsername(request.getUsername()).isPresent())
+        {
+            return AuthenticationResponse.builder().token("").build();
+        }
         User user=User.builder()
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
@@ -50,6 +55,7 @@ public class UserService {
         );
 
         User user=userDAO.findByUsername(request.getUsername()).orElseThrow();
+        System.out.println(user);
         String jwtToken=jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)

@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/movies")
+@CrossOrigin(origins = "http://localhost:4200")
 public class MoviesController {
     @Autowired
     MovieService movieService;
     @GetMapping(value = "/get-movie")
-    public List<Movie> getAllMovies()  {
+    public List<Movie> getAllMovies()
+    {
         return movieService.getMoviesData();
     }
     @GetMapping(value = "/get-movie/page-{pageNumber}")

@@ -7,6 +7,7 @@ import com.backproject.userMicroservice.models.User;
 import com.backproject.userMicroservice.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,13 +16,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class UsersController {
 
     @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @GetMapping(value = "/get-user")
     public List<User> getUsers()  {
+
         return userService.getUsersData();
     }
 
@@ -29,9 +32,16 @@ public class UsersController {
     public ResponseEntity<AuthenticationResponse> addUser(
             @RequestBody RegisterRequest request)
     {
-        return ResponseEntity.ok(userService.register(request));
+        AuthenticationResponse auth=userService.register(request);
+        if(auth.getToken().equals(""))
+        {
+            return new ResponseEntity<AuthenticationResponse>(HttpStatus.BAD_REQUEST);
+        }
+        else
+        {
+            return ResponseEntity.ok(userService.register(request));
+        }
     }
-
 
     @PostMapping(value = "/authenticate")
     public ResponseEntity<AuthenticationResponse> signIn(

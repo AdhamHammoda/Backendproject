@@ -18,6 +18,7 @@ public class MovieService {
     MovieDAO movieDAO;
     public List<Movie> getMoviesData()
     {
+        System.out.println("hhhh");
         return movieDAO.findAll();
     }
     public void addMovie(Movie movie)

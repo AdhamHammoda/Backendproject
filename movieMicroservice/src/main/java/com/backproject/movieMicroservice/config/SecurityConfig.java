@@ -1,4 +1,4 @@
-package com.backproject.userMicroservice.config;
+package com.backproject.movieMicroservice.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,22 +18,17 @@ public class SecurityConfig {
 
     @Autowired
     private final JwtAuthenticationFilter jwtAuthFilter;
-    @Autowired
-    private final AuthenticationProvider authenticationProvider;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.cors();
         http
                 .csrf().disable()
-                .authorizeRequests(authorizeRequests ->
-                        authorizeRequests
-                                .antMatchers("/users/**").permitAll()
-                                .anyRequest().authenticated()
-                )
-
+                .authorizeRequests()
+                                .antMatchers("/movies/**")
+                                .authenticated().and()
                 .sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
-                .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
 
