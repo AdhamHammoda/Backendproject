@@ -6,10 +6,15 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -19,10 +24,13 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
+@SpringBootTest
+@AutoConfigureMockMvc
 public class JwtServiceTest {
+
     @InjectMocks
-    private JwtService jwtService;
+    private  JwtService jwtService;
+
     private static final String SECRETKEY="D38CF5EF946A711F74C7343C9FFB45DCE524ABC1C812D15322A368AF51";
 
 
