@@ -1,12 +1,10 @@
 package com.backproject.userMicroservice.models;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
-import java.util.Collection;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 public class AuthenticationRequestTest {
     @Test
@@ -70,6 +68,5 @@ public class AuthenticationRequestTest {
         int req2=request2.hashCode();
         assertTrue(req1==req2);
     }
-
 
 }

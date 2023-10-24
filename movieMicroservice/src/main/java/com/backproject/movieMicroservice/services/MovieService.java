@@ -9,8 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieService {
@@ -18,12 +18,11 @@ public class MovieService {
     MovieDAO movieDAO;
     public List<Movie> getMoviesData()
     {
-        System.out.println("hhhh");
         return movieDAO.findAll();
     }
-    public void addMovie(Movie movie)
+    public Movie addMovie(Movie movie)
     {
-        movieDAO.save(movie);
+        return movieDAO.save(movie);
     }
     public Movie getMovie(int id)
     {

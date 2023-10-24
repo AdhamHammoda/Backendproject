@@ -55,6 +55,17 @@ public class JwtServiceTest {
     }
 
     @Test
+    void testExtractExpirationSuccessfully()
+    {
+        User user=User.builder().username("test").password("").build();
+
+        String token=jwtService.generateToken(user);
+        Date expiration=jwtService.extractExpiration(token);
+        assertNotNull(expiration);
+    }
+
+
+    @Test
     void generateExpiredToken()
     {
         Map<String ,Object> extraClaims= new HashMap<>();
