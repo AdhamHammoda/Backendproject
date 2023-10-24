@@ -2,11 +2,14 @@ package com.backproject.userMicroservice.models;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.test.context.ContextConfiguration;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
+@ContextConfiguration(classes = TestConfiguration.class)
 public class AuthenticationResponseTest {
     @Test
     void AuthenticationResponseCreatedSuccessfully()

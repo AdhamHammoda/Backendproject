@@ -2,8 +2,10 @@ package com.backproject.userMicroservice.models;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.util.Collection;
 
@@ -11,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest
+@ContextConfiguration(classes = TestConfiguration.class)
 public class UserTest {
     @Test
     void UserCreatedSuccessfully()
